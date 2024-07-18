@@ -1,0 +1,33 @@
+@Controller
+public class registerController{
+@Autowired
+private registerService regservice;
+@GetMapping("/index")
+public String index(){
+return "index";
+}
+@GetMapping("/register")
+public String register(){
+return "register";
+}
+@GetMapping("/signin")
+public String signin(){
+return "signin";
+}
+
+@PostMapping("/login")
+public ModelAndView submitregdata(@ModelAttribute("reg") register reg)
+{
+regservice.addregisterrecord(reg);
+ModelAndView mv=new ModelAndView();
+mv.setViewName("login");
+return mv;
+}
+
+
+@GetMapping("/listusers")
+public ModelAndView listusers(){
+ModelAndView mv=new ModelAndView("candi");
+mv.addObject("userslist",regservice.listallusers());
+return mv;
+}

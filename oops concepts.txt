@@ -1,0 +1,104 @@
+oops concepts:
+==================================================================
+
+encapsulation:
+=========================
+public class Encap{
+private String name;
+public String getName(){
+return name;
+}
+public void setName(){
+this.name=name;
+}
+
+public static void main(String[] args){
+Encap en=new Encap();
+en.setName("Jow");
+System.out.println(en.getName());
+}
+======================================================================
+Inheritance:
+==========================================
+public class Animal{
+public void eat(){
+System.out.println("Animal eats food");
+}
+}
+
+class Dog extends Animal{
+public void bark(){
+System.out.println("Dog bark");
+}
+}
+
+public class Inherit{
+public static void main(String[] args){
+Dog d=new Dog();
+d.eat();
+d.bark();
+}
+}
+=================================================
+
+polymorphism: single function taking many forms
+
+method overloading:
+
+class PolymorphismExample {
+    // Overloaded methods
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    public double add(double a, double b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        PolymorphismExample obj = new PolymorphismExample();
+        System.out.println(obj.add(5, 10)); // Calls the int version
+        System.out.println(obj.add(5.5, 10.5)); // Calls the double version
+    }
+}
+
+
+method overriding:
+
+class Animal(){
+public void bark(){
+sos("bark");
+}
+class Dog extends Animal(){
+@Override
+public void bark(){
+sos("nark");
+}
+public class Poly{
+public static void main(String[] args){
+Dog d=new Dog();
+d.bark();
+}
+
+
+
+
+=================================================================
+Abstraction is the concept of hiding the complex implementation details and showing only the necessary features of an object. It can be achieved using abstract classes and interfaces.
+
+abstract class Animal{
+public abstract void sound();
+public void sleep(){
+sos('ll');
+}
+class Dog extends Animal{
+public void sound(){
+sos('barks');
+}
+}
+public class Abstract{
+psvm(S[] args){
+Dog d=new Dog();
+d.sound();
+d.sleep();
+}
