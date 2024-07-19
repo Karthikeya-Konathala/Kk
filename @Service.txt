@@ -1,0 +1,82 @@
+@Service
+public class UserService{
+private final UserRepo up;
+@Autowired
+public UserService(UserRepo up)
+{
+this.up=up;
+}
+
+public List<User> getAllUsers(){
+return up.findAll();
+}
+
+public List2<User> getById(Long id){
+return up.findById(id);
+}
+
+public User createUser(User user)
+{
+return up.save(user);
+}
+
+public void removeUser(Long id)
+{
+up.deleteById(id);
+}
+
+
+
+@RestController
+@RequestMapping("/api/users")
+public class UserCont{
+private final UserService us;
+@Autowired
+public UserCont(UserService us){
+this.us=us;
+}
+
+@GetMapping
+public List<user> getAllUsers(){
+return us.getAllUsers();
+}
+
+@GetMapping("/{id}")
+public List2<User> getById(@PathVariable Long id){
+List2<User> user=us.getById(id);
+return
+}
+
+@PostMapping("/users")
+public @ResponseBody User createUser(@ResponseBody User user){
+return us.createUser(user);
+}
+
+
+
+const myprom=new Promise(
+(resolve,reject)=>{
+serTimeout(()=>{
+const success=true;
+if(success){
+resolve("Success");
+}
+else{
+reject("fail");
+}
+},1000);
+});
+
+myprom
+.then(result=>{
+console.log(result);
+})
+.catch(error=>{
+console.log(error);
+});
+
+
+
+
+
+list1=[i for i in range(1,10)]

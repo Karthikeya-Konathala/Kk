@@ -1,0 +1,11 @@
+use dbs_name
+db.dropDatabase()
+db.createCollection("Employee")--create table
+show collections--show tables
+db.collection_name.drop()
+db.collectionName.insert({name:'Emp1',address:'vja'})
+db.collectionName.insertMany([{},{}])--insert many docs
+db.collection_name.find()---search
+db.collection_name.update({'name':'Emp1'},{$set:{'name':'New Emp1'})
+db.collection_name.save()
+db.collection_name.remove({'name':'Emp1'})
