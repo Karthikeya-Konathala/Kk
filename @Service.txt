@@ -54,17 +54,17 @@ return us.createUser(user);
 
 
 
-const myprom=new Promise(
-(resolve,reject)=>{
-serTimeout(()=>{
+const myprom=new Promise((resolve,reject)=>{
+setTimeout(()=>{
 const success=true;
-if(success){
-resolve("Success");
+if(success)
+{
+resolve("done");
 }
 else{
-reject("fail");
+reject("sorry");
 }
-},1000);
+},1000});
 });
 
 myprom
