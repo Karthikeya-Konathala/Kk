@@ -1,0 +1,51 @@
+@SpringBootApplication
+public class Application{
+public static void main(String[] args){
+SpringApplication.run(Application.class,args);
+}
+}
+
+public class CustomerNotFoundException extends RuntimeException{
+public CustomerNotFoundException(String message)
+{
+super(message);
+}
+}
+
+model class:
+===========================
+public class Customer{
+private String name;
+}
+
+service class:
+====================================
+@Service
+public class CustomerService{
+public Customer findCustomerByName(String name)
+{
+throw new CustomerNotFoundException("Customer not found: "+name);
+}
+}
+
+
+@RestController
+public class CustomerController{
+private final CustomerService cs;
+public CustomerController(CustomerService cs)
+{
+this.cs=cs;
+}
+@GetMapping("/customers/{name}")
+public Customer getCustomer(@PathVariable String name)
+{
+return CustomerService.findCustomerByName(name);
+}
+==========================================================
+@ExceptionHandler(CustomerNotFoundException.class)
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public string handleCustomerNotFoundException(CustomerNotFoundException ex)
+{
+return ex.getMessage();
+}
+}
