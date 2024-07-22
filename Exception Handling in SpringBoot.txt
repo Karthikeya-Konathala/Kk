@@ -24,28 +24,69 @@ service class:
 public class CustomerService{
 public Customer findCustomerByName(String name)
 {
-throw new CustomerNotFoundException("Customer not found: "+name);
+private List<Customer> cl=new List<>();
+public Customer findCustomerByName(String name)
+{
+return cl.stream()
+.filter(cust->cust.getName().equals(name))
+.findFirst()
+.orElseThrow(()->new CustomerNotFoundException("Customer not found" +name);
+
 }
+
+public Customer createCustomer(Customer newCustomer)
+{
+cl.add(newCustomer);
+return newCustomer;
+}
+
+public Customer updateCustomer(String name,Customer updateCustomer)
+{
+for(int i=0;i<cl.size();i++){
+if(cl.get(i).getName().equals(name)){
+cl.set(i,updateCustomer);
+return updateCustomer;
+}
+}
+throw new CustomerNotFoundException("Customer Not Found:" +name);
+}
+
+public Customer deleteCustomer(String name){
+cl.removeIf(cus->cus.getName().equals(name));
 }
 
 
 @RestController
 public class CustomerController{
 private final CustomerService cs;
-public CustomerController(CustomerService cs)
-{
+public CustomerController(CustomerService cs){
 this.cs=cs;
 }
 @GetMapping("/customers/{name}")
-public Customer getCustomer(@PathVariable String name)
+public Customer getCustomerByName(@PathVariable String name)
 {
 return CustomerService.findCustomerByName(name);
 }
-==========================================================
-@ExceptionHandler(CustomerNotFoundException.class)
-@ResponseStatus(HttpStatus.NOT_FOUND)
-public string handleCustomerNotFoundException(CustomerNotFoundException ex)
+
+@PostMapping("/customers")
+public Customer saveCustomer(@ResponseBody Customer newCustomer)
 {
-return ex.getMessage();
+return CustomerService.addCustomer(newCustomer);
 }
+
+@PutMapping("/customers/{name}")
+public Customer updateCustomer(@PathVariable String name,@ResponseBody Customer updateCustomer){
+return CustomerService.updateCustomer(name,updateCustomer);
+}
+
+@DeleteMapping("/customers")
+public void deleteCustomer(@PathVariable String name){
+customerService.deleteCUstomer(name);
+}
+
+@ExceptionHandler(CustomerNotFoundException.class)
+@ResponseStatus(Http.NOT_FOUND)
+public string handleCustomerNotFoundException(CustomerNotFoundException cx)
+{
+return cx.getMessage();
 }
